@@ -2,20 +2,20 @@ import { useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 import { ApiResponse, rootUrl } from ".";
 
-export interface Planet {
+export interface Person {
   name: string;
-  rotation_period: string;
+  hair_color: string;
 }
 
 const PAGE_SIZE = 10;
 
-const usePlanets = ({ search }: { search?: string }) => {
+const usePeople = ({ search }: { search?: string }) => {
   const [page, setPage] = useState<number>(1);
 
-  const ref = useRef<ApiResponse<Planet>>();
+  const ref = useRef<ApiResponse<Person>>();
 
-  const { data, error } = useSWR<ApiResponse<Planet>>(
-    `${rootUrl}/planets?page=${page}${search ? `&search=${search}` : ""}`,
+  const { data, error } = useSWR<ApiResponse<Person>>(
+    `${rootUrl}/people?page=${page}${search ? `&search=${search}` : ""}`,
     { fallbackData: ref.current }
   );
 
@@ -34,11 +34,11 @@ const usePlanets = ({ search }: { search?: string }) => {
   const onNextPage = () => !isLastPage && setPage(page + 1);
 
   return {
-    planets: data
+    people: data
       ? data.results
       : Array.from({ length: 10 }, (_, index) => ({
           name: "",
-          rotation_period: "",
+          hair_color: "",
         })),
     isError: error,
     isLoading: !error && !data,
@@ -52,4 +52,4 @@ const usePlanets = ({ search }: { search?: string }) => {
   };
 };
 
-export default usePlanets;
+export default usePeople;

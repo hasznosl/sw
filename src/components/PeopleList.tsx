@@ -1,12 +1,12 @@
 import { Box, IconButton, TextField, Typography } from "@mui/material";
-import PlanetCard from "../components/PlanetCard";
-import usePlanets from "../hooks/usePlanets";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import usePeople from "../hooks/usePeople";
+import PersonCard from "./PersonCard";
 import Skeleton from "./Skeleton";
 import useDebounce from "../hooks/useDebounce";
 
-const PlanetList = () => {
+const PeopleList = () => {
   const {
     debouncedValue: debouncedSearch,
     setValue: setSearch,
@@ -14,7 +14,7 @@ const PlanetList = () => {
   } = useDebounce();
 
   const {
-    planets,
+    people,
     isFirstPage,
     isLastPage,
     page,
@@ -22,12 +22,12 @@ const PlanetList = () => {
     onNextPage,
     isLoading,
     lastPage,
-  } = usePlanets({ search: debouncedSearch });
+  } = usePeople({ search: debouncedSearch });
 
   return (
     <>
       <Box display="flex" flexDirection="row" alignItems="center" gap={3}>
-        <Typography variant="h5">Planets</Typography>
+        <Typography variant="h5">People</Typography>
         <IconButton disabled={isFirstPage} onClick={onPreviousPage}>
           <KeyboardArrowLeft />
         </IconButton>
@@ -48,12 +48,12 @@ const PlanetList = () => {
         gap={3}
         flexWrap="wrap"
       >
-        {planets.map((planet, index) => (
+        {people.map((person, index) => (
           <Box key={index} sx={{ margin: 2 }}>
-            <PlanetCard
-              planet={planet}
-              isLoading={isLoading}
+            <PersonCard
+              person={person}
               skeleton={<Skeleton />}
+              isLoading={isLoading}
             />
           </Box>
         ))}
@@ -61,4 +61,4 @@ const PlanetList = () => {
     </>
   );
 };
-export default PlanetList;
+export default PeopleList;

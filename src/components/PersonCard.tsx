@@ -1,30 +1,27 @@
 import { Card, List, ListItem, ListItemText } from "@mui/material";
 import { CARD_HEIGHT, CARD_WIDTH } from "../constants";
-import { Planet } from "../hooks/usePlanets";
+import { Person } from "../hooks/usePeople";
 
 interface Props {
-  planet: Planet;
-  isLoading: boolean;
+  person: Person;
   skeleton: React.ReactElement;
+  isLoading: boolean;
 }
 
-const PlanetCard = ({ planet, skeleton, isLoading }: Props) =>
+const PersonCard = ({ person, isLoading, skeleton }: Props) =>
   isLoading ? (
     skeleton
   ) : (
     <Card sx={{ height: CARD_HEIGHT, width: CARD_WIDTH }}>
       <List>
         <ListItem>
-          <ListItemText primary={planet.name} secondary="name" />
+          <ListItemText primary={person.name} secondary="name" />
         </ListItem>
         <ListItem>
-          <ListItemText
-            primary={planet.rotation_period}
-            secondary="rotation period"
-          />
+          <ListItemText primary={person.hair_color} secondary="hair color" />
         </ListItem>
       </List>
     </Card>
   );
 
-export default PlanetCard;
+export default PersonCard;
