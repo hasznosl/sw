@@ -6,35 +6,44 @@ import RequireAuth from "./fakeAuth/RequireAuth";
 import LoggedInProvider from "./contexts/LoggedInContext";
 import { CssBaseline } from "@mui/material";
 import LoggedInLayout from "./layouts/Layout";
+import { SWRConfig } from "swr";
 
 const App = () => (
   <LoggedInProvider>
     <CssBaseline />
-    <BrowserRouter>
-      <Routes>
-        <Route path="login" element={<Login />} />
-        <Route
-          path="/"
-          element={
-            <RequireAuth>
-              <LoggedInLayout>
-                <Overview />
-              </LoggedInLayout>
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/planets/{:id}"
-          element={
-            <RequireAuth>
-              <LoggedInLayout>
-                <PlanetDetails />
-              </LoggedInLayout>
-            </RequireAuth>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+    <SWRConfig
+      value={{
+        refreshInterval: 3000,
+        fetcher: (resource, init) =>
+          fetch(resource, init).then((res) => res.json()),
+      }}
+    >
+      <BrowserRouter>
+        <Routes>
+          <Route path="login" element={<Login />} />
+          <Route
+            path="/"
+            element={
+              <RequireAuth>
+                <LoggedInLayout>
+                  <Overview />
+                </LoggedInLayout>
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/planets/{:id}"
+            element={
+              <RequireAuth>
+                <LoggedInLayout>
+                  <PlanetDetails />
+                </LoggedInLayout>
+              </RequireAuth>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </SWRConfig>
   </LoggedInProvider>
 );
 

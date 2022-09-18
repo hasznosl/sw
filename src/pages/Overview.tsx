@@ -1,5 +1,11 @@
-import { AppBar, Button, Toolbar, Typography } from "@mui/material";
+import PlanetList from "../components/PlanetList";
 
-const Overview = () => <>Overview</>;
+const Overview = () => {
+  return (
+    <>
+      <PlanetList />
+    </>
+  );
+};
 
 export default Overview;

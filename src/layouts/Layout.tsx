@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
 import { useContext } from "react";
 import { LoggedInContext } from "../contexts/LoggedInContext";
 
@@ -25,7 +25,7 @@ const Layout = ({ children }: Props) => {
           </Button>
         </Toolbar>
       </AppBar>
-      {children}
+      <Box sx={{ padding: 1 }}>{children}</Box>
     </>
   );
 };
