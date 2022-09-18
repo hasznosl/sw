@@ -3,9 +3,13 @@ import Login from "./pages/Login";
 import Overview from "./pages/Overview";
 import PlanetDetails from "./pages/PlanetDetails";
 import RequireAuth from "./fakeAuth/RequireAuth";
+import LoggedInProvider from "./contexts/LoggedInContext";
+import { CssBaseline } from "@mui/material";
+import LoggedInLayout from "./layouts/Layout";
 
-const App = () => {
-  return (
+const App = () => (
+  <LoggedInProvider>
+    <CssBaseline />
     <BrowserRouter>
       <Routes>
         <Route path="login" element={<Login />} />
@@ -13,7 +17,9 @@ const App = () => {
           path="/"
           element={
             <RequireAuth>
-              <Overview />
+              <LoggedInLayout>
+                <Overview />
+              </LoggedInLayout>
             </RequireAuth>
           }
         />
@@ -21,13 +27,15 @@ const App = () => {
           path="/planets/{:id}"
           element={
             <RequireAuth>
-              <PlanetDetails />
+              <LoggedInLayout>
+                <PlanetDetails />
+              </LoggedInLayout>
             </RequireAuth>
           }
         />
       </Routes>
     </BrowserRouter>
-  );
-};
+  </LoggedInProvider>
+);
 
 export default App;
