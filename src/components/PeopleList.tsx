@@ -26,7 +26,13 @@ const PeopleList = () => {
 
   return (
     <>
-      <Box display="flex" flexDirection="row" alignItems="center" gap={3}>
+      <Box
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        gap={3}
+        flexWrap="wrap"
+      >
         <Typography variant="h5">People</Typography>
         <IconButton disabled={isFirstPage} onClick={onPreviousPage}>
           <KeyboardArrowLeft />

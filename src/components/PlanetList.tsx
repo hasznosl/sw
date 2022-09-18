@@ -26,7 +26,13 @@ const PlanetList = () => {
 
   return (
     <>
-      <Box display="flex" flexDirection="row" alignItems="center" gap={3}>
+      <Box
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        gap={3}
+        flexWrap="wrap"
+      >
         <Typography variant="h5">Planets</Typography>
         <IconButton disabled={isFirstPage} onClick={onPreviousPage}>
           <KeyboardArrowLeft />
